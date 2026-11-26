@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+<meta name="theme-color" content="#bfe6ff">
+<title>Ritmik Sayma Macerası</title>
+<style>
+/*__FONTFACE__*/
+/*__CSS__*/
+</style>
+</head>
+<body>
+<div id="app">
+
+  <!-- ===================== ANA SAYFA ===================== -->
+  <section id="home" class="screen on">
+    <div id="hbg"></div>
+    <div class="hills"><svg viewBox="0 0 400 60" preserveAspectRatio="none"><path d="M0 40 Q60 12 130 34 T260 30 T400 26 L400 60 L0 60Z" fill="#a6e88f"/><path d="M0 50 Q90 32 190 46 T400 42 L400 60 L0 60Z" fill="#82d672"/></svg></div>
+    <header class="hhead">
+      <h1 class="title" id="title">Ritmik Sayma Macerası</h1>
+      <p class="sub">Her yoldaki sayılar hep aynı adımla zıplıyor. Boş kutuları doldur, yıldızları topla!</p>
+    </header>
+    <div class="hmain">
+      <div class="hero">
+        <div class="bubble" id="heroBubble">Merhaba, ben Zıpzıp! Bir seviye seç, birlikte sayalım.</div>
+        <div class="mascot" id="heroM"></div>
+      </div>
+      <div class="levels" id="levels"></div>
+    </div>
+    <footer class="hfoot">
+      <button class="btn b-yellow" id="howBtn" type="button"><i data-ic="play"></i>Nasıl oynanır?</button>
+      <button class="btn" id="sndBtn" type="button"><i data-ic="sound"></i><span>Ses açık</span></button>
+      <button class="btn hide-s" id="fsBtn" type="button"><i data-ic="full"></i>Tam ekran</button>
+    </footer>
+  </section>
+
+  <!-- ===================== SORU HARİTASI ===================== -->
+  <section id="map" class="screen">
+    <div class="topbar">
+      <button class="btn ico" id="mapHome" type="button" aria-label="Ana sayfa"><i data-ic="home"></i></button>
+      <div class="ttl" id="mapTitle"></div>
+      <div class="pill" id="mapStars"></div>
+    </div>
+    <p class="maphint">Bir soru seç. Altındaki yıldızlar en iyi sonucunu gösterir.</p>
+    <div class="mapscroll"><div class="mapgrid" id="mapGrid"></div></div>
+  </section>
+
+  <!-- ===================== OYUN ===================== -->
+  <section id="game" class="screen">
+    <div id="tbg"></div>
+    <div class="topbar">
+      <button class="btn ico" id="gHome" type="button" aria-label="Ana sayfa"><i data-ic="home"></i></button>
+      <button class="btn ico" id="gMap" type="button" aria-label="Soru haritası"><i data-ic="grid"></i></button>
+      <div class="ttl" id="gTitle"></div>
+      <button class="btn ico" id="gPrev" type="button" aria-label="Önceki soru"><i data-ic="prev"></i></button>
+      <button class="btn ico" id="gNext" type="button" aria-label="Sonraki soru"><i data-ic="next"></i></button>
+      <div class="pill hide-s" id="gStars"></div>
+      <button class="btn ico" id="gSnd" type="button" aria-label="Ses"><i data-ic="sound"></i></button>
+      <button class="btn ico hide-s" id="gFs" type="button" aria-label="Tam ekran"><i data-ic="full"></i></button>
+    </div>
+    <div class="gbody">
+      <div class="bwrap" id="bwrap"><div class="board" id="board"></div></div>
+      <aside class="panel">
+        <div class="buddy"><div class="mascot" id="gM"></div><div class="bubble" id="gBubble"></div></div>
+        <div class="keypad" id="keypad">
+          <button class="key" type="button" data-k="1">1</button><button class="key" type="button" data-k="2">2</button><button class="key" type="button" data-k="3">3</button>
+          <button class="key" type="button" data-k="4">4</button><button class="key" type="button" data-k="5">5</button><button class="key" type="button" data-k="6">6</button>
+          <button class="key" type="button" data-k="7">7</button><button class="key" type="button" data-k="8">8</button><button class="key" type="button" data-k="9">9</button>
+          <button class="key k0" type="button" data-k="0">0</button>
+          <button class="key kdel" type="button" data-k="del" aria-label="Sil"><i data-ic="back"></i></button>
+        </div>
+        <div class="actions">
+          <button class="btn b-yellow" id="aHint" type="button"><i data-ic="bulb"></i>İpucu</button>
+          <button class="btn b-green" id="aCheck" type="button"><i data-ic="check"></i>Kontrol Et</button>
+          <button class="btn" id="aReset" type="button"><i data-ic="reset"></i>Baştan</button>
+          <button class="btn" id="aShow" type="button"><i data-ic="eye"></i>Çözüm</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===================== PENCERELER ===================== -->
+  <div class="modal" id="winModal">
+    <div class="card">
+      <div class="win-m mascot happy" id="winM"></div>
+      <h2 id="winTitle">Bravo!</h2>
+      <div class="stars" id="winStars"></div>
+      <p id="winMsg"></p>
+      <div class="row">
+        <button class="btn b-green" id="wNext" type="button"></button>
+        <button class="btn" id="wAgain" type="button"><i data-ic="reset"></i>Tekrar oyna</button>
+        <button class="btn" id="wMap" type="button"><i data-ic="grid"></i>Soru haritası</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="askModal">
+    <div class="card">
+      <h2 style="color:#7950f2">Çözümü göstereyim mi?</h2>
+      <p>Bu soruda yıldız kazanamazsın. Sonra Baştan’a basıp kendin de çözebilirsin.</p>
+      <div class="row"><button class="btn b-purple" id="askYes" type="button"><i data-ic="eye"></i>Göster</button><button class="btn" id="askNo" type="button">Vazgeç</button></div>
+    </div>
+  </div>
+
+  <div class="modal" id="howModal">
+    <div class="card how">
+      <h2>Nasıl oynanır?</h2>
+      <div class="how-grid">
+        <div class="how-media" id="howMedia">
+          <video id="howVideo" controls playsinline preload="none"></video>
+          <div class="demo-wrap" id="demoWrap"><div class="board" id="demo"></div></div>
+        </div>
+        <ol>
+          <li>Sayılar yollar boyunca dizilir. Yatay yollar soldan sağa, dikey yollar yukarıdan aşağıya okunur.</li>
+          <li>Her yol hep aynı adımla sayar: 3’er 3’er ileri ya da 4’er 4’er geri gibi.</li>
+          <li>Önce iki sayısı belli olan yolu bul. Örnekte 9’dan 21’e dört zıplamada varılıyor. 2’şer sayarsak 17’de kalırız, 3’er sayarsak tam 21’e varırız.</li>
+          <li>Kare kutu iki yolun ortak kutusudur. Burada 18 çıktı. Artık dikey yolda 12 ve 18 belli, bu yol 2’şer 2’şer ileri sayıyor.</li>
+          <li>Kutuya dokun, sayıyı alttaki tuşlarla ya da klavyeyle yaz. Hiç hata yapmadan ve ipucu almadan bitirirsen 3 yıldız kazanırsın.</li>
+        </ol>
+      </div>
+      <div class="row">
+        <button class="btn b-yellow" id="howDemo" type="button"><i data-ic="play"></i>Örnek soruyu çöz</button>
+        <button class="btn b-green" id="howOk" type="button"><i data-ic="check"></i>Anladım, oynayalım!</button>
+      </div>
+    </div>
+  </div>
+
+  <canvas id="fx"></canvas>
+</div>
+<script>
+/*__ART__*/
+</script>
+<script>
+/*__MAIN__*/
+</script>
+</body>
+</html>
